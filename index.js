@@ -30,7 +30,7 @@ const verifyToken = async (req, res, next) => {
   if (!authHeader) {
     return res.status(401).json({ message: "Unauthorized" });
   }
-  
+
   const token = authHeader.split(" ")[1];
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -43,6 +43,7 @@ const verifyToken = async (req, res, next) => {
     return res.status(403).json({ message: "Forbidden" });
   }
 };
+
 
 async function run() {
   try {
