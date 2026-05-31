@@ -1,18 +1,18 @@
-# ArenaHub Server
+# VoltArena Server
 
-Backend API for ArenaHub, a sports facility booking platform built with Node.js, Express.js, and MongoDB.
+Backend API for VoltArena, a sports facility booking platform built with Node.js, Express.js, MongoDB, and JWT authentication.
 
 ## Features
 
-* Facility CRUD operations
-* Facility search and filtering
-* Featured facilities endpoint
-* Booking management
-* MongoDB integration
-* JWT authentication using JWKS
-* Protected routes for create, update, and delete operations
-* CORS enabled
-* Environment variable configuration
+* Facility CRUD Operations
+* Facility Search & Filtering
+* Featured Facilities Endpoint
+* Booking Management
+* MongoDB Database Integration
+* JWT Authentication using JWKS
+* Protected Routes
+* Environment Variable Support
+* RESTful API Architecture
 
 ---
 
@@ -21,7 +21,7 @@ Backend API for ArenaHub, a sports facility booking platform built with Node.js,
 * Node.js
 * Express.js
 * MongoDB
-* jose-cjs (JWT Verification)
+* JOSE (JWT Verification)
 * dotenv
 * cors
 
@@ -32,8 +32,8 @@ Backend API for ArenaHub, a sports facility booking platform built with Node.js,
 ### Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd arenahub-server
+git clone <your-repository-url>
+cd voltarena-server
 ```
 
 ### Install Dependencies
@@ -42,9 +42,9 @@ cd arenahub-server
 npm install
 ```
 
-### Environment Variables
+### Create Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the root directory.
 
 ```env
 PORT=5000
@@ -56,7 +56,7 @@ CLIENT_URL=http://localhost:3000
 
 ---
 
-## Running the Server
+## Run the Server
 
 ### Development
 
@@ -70,9 +70,9 @@ npm run dev
 npm start
 ```
 
-Server will run on:
+Server runs at:
 
-```bash
+```text
 http://localhost:5000
 ```
 
@@ -80,11 +80,9 @@ http://localhost:5000
 
 ## API Endpoints
 
-### Base Route
+### Health Check
 
 #### GET /
-
-Returns server status.
 
 ```http
 GET /
@@ -106,7 +104,7 @@ Response:
 GET /featured
 ```
 
-Returns the first 6 facilities.
+Returns the first 6 featured facilities.
 
 ---
 
@@ -116,13 +114,13 @@ Returns the first 6 facilities.
 GET /facility
 ```
 
-Optional Query Parameters:
+#### Query Parameters
 
-| Parameter | Description                               |
-| --------- | ----------------------------------------- |
-| userId    | Filter by user ID                         |
-| search    | Search facility name                      |
-| type      | Filter by facility type (comma separated) |
+| Parameter | Description                |
+| --------- | -------------------------- |
+| userId    | Filter facilities by owner |
+| search    | Search facility name       |
+| type      | Filter by facility type    |
 
 Example:
 
@@ -146,7 +144,9 @@ GET /facility/684d6e2c5b87d72a0f1b2345
 
 ---
 
-### Create Facility (Protected)
+### Create Facility
+
+Protected Route
 
 ```http
 POST /facility
@@ -158,19 +158,11 @@ Headers:
 Authorization: Bearer <token>
 ```
 
-Body Example:
-
-```json
-{
-  "facilityName": "Arena Football Ground",
-  "type": "Outdoor",
-  "location": "Dhaka"
-}
-```
-
 ---
 
-### Update Facility (Protected)
+### Update Facility
+
+Protected Route
 
 ```http
 PATCH /facility/:id
@@ -182,17 +174,11 @@ Headers:
 Authorization: Bearer <token>
 ```
 
-Body Example:
-
-```json
-{
-  "facilityName": "Updated Arena Name"
-}
-```
-
 ---
 
-### Delete Facility (Protected)
+### Delete Facility
+
+Protected Route
 
 ```http
 DELETE /facility/:id
@@ -228,7 +214,7 @@ GET /booking/user123
 POST /booking
 ```
 
-Body Example:
+Sample Request:
 
 ```json
 {
@@ -240,7 +226,9 @@ Body Example:
 
 ---
 
-### Delete Booking (Protected)
+### Delete Booking
+
+Protected Route
 
 ```http
 DELETE /booking/:bookingId
@@ -256,29 +244,18 @@ Authorization: Bearer <token>
 
 ## Authentication
 
-Protected routes require a valid JWT token.
+JWT tokens are verified using a JWKS endpoint.
 
-Include the token in the request header:
+Authorization Header:
 
 ```http
 Authorization: Bearer <your_token>
 ```
 
-JWT verification is performed using a remote JWKS endpoint:
+JWKS Endpoint:
 
 ```text
-{CLIENT_URL}/api/auth/jwks
-```
-
----
-
-## Project Structure
-
-```text
-├── server.js
-├── package.json
-├── .env
-└── node_modules
+${CLIENT_URL}/api/auth/jwks
 ```
 
 ---
@@ -291,7 +268,20 @@ Stores facility information.
 
 ### bookings
 
-Stores booking information.
+Stores user booking records.
+
+---
+
+## Project Structure
+
+```text
+voltarena-server/
+│
+├── server.js
+├── package.json
+├── .env
+└── README.md
+```
 
 ---
 
@@ -299,10 +289,10 @@ Stores booking information.
 
 ```json
 {
-  "cors": "^latest",
-  "dotenv": "^latest",
-  "express": "^latest",
-  "mongodb": "^latest",
+  "express": "^5.x",
+  "mongodb": "^6.x",
+  "dotenv": "^17.x",
+  "cors": "^2.x",
   "jose-cjs": "^latest"
 }
 ```
@@ -311,4 +301,10 @@ Stores booking information.
 
 ## License
 
-This project is licensed under the MIT License.
+MIT License
+
+---
+
+## Author
+
+Built for the VoltArena platform.
