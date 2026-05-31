@@ -9,6 +9,31 @@ const { createRemoteJWKSet, jwtVerify } = require("jose-cjs");
 
 const PORT = process.env.PORT;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.use(cors());
 app.use(express.json());
 
