@@ -21,6 +21,7 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
+
 const JWKS = createRemoteJWKSet(
   new URL(`${process.env.CLIENT_URL}/api/auth/jwks`),
 );
